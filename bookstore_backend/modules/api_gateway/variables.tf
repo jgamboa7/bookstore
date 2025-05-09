@@ -1,0 +1,11 @@
+variable "region" {}
+variable "project_name" {}
+variable "lambda_upload_invoke_arn" {}
+variable "lambda_search_invoke_arn" {}
+variable "lambda_download_invoke_arn" {}
+variable "lambda_upload_name" {}
+variable "lambda_search_name" {}
+variable "lambda_download_name" {}
+variable "download_lambda_arn" {}
+variable "stage_name" {}
+variable "cognito_user_pool_arn" {}

@@ -1,0 +1,126 @@
+/* Enhance existing search container styles */
+.search-container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  
+  /* Site Search specific styles */
+  .site-search-container h2 {
+    margin-bottom: 2rem;
+    color: var(--light-text);
+    text-align: center;
+  }
+  
+  /* Search form and input styling */
+  .search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  /* Input container styling */
+  .search-input-container,
+  .MuiInputBase-root,
+  .search-bar {
+    display: flex;
+    width: 100%;
+    height: var(--input-height);
+    border-radius: 30px !important;
+    background-color: white !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: none;
+    padding: 0 0rem;
+  }
+  
+  /* Input field styling */
+  .search-input,
+  .MuiInputBase-input {
+    flex-grow: 1;
+    background-color: white !important;
+    color: #232323 !important;
+    border: none;
+    padding: 0 1.5rem;
+    font-size: 1rem !important;
+    outline: none !important;
+    width: 100% !important;
+    height: 100% ;
+  }
+  
+  /* Placeholder text styling */
+  .search-input::placeholder,
+  input[type="search"]::placeholder,
+  input[type="text"]::placeholder,
+  .MuiInputBase-input::placeholder {
+    color: #757575 !important;
+    opacity: 0.8 !important;
+  }
+  
+  /* Search button styling */
+  .search-button,
+  button[type="submit"],
+  button:has(> svg[data-testid="SearchIcon"]) {
+    height: var(--input-height);
+    width: auto;
+    min-width: 100px;
+    border: none !important;
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-speed);
+    padding: 0 1.5rem;
+    font-weight: 500;
+    border-radius: 0 30px 30px 0 !important;
+  }
+  
+  /* Button hover state */
+  .search-button:hover,
+  button[type="submit"]:hover {
+    background-color: #ff8124 !important;
+  }
+  
+  /* Button disabled state */
+  .search-button:disabled,
+  button[type="submit"]:disabled {
+    background-color: #a0a0a0 !important;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .search-form,
+    form:has(input[type="search"]),
+    form:has(input[type="text"]) {
+      flex-direction: column;
+    }
+    
+    .search-input-container,
+    .MuiInputBase-root,
+    .search-bar {
+      border-radius: var(--border-radius) !important;
+    }
+    
+    .search-input,
+    input[type="search"],
+    input[type="text"],
+    .MuiInputBase-input {
+      padding: 1rem 1.5rem !important;
+      border-radius: var(--border-radius) !important;
+    }
+    
+    .search-button,
+    button[type="submit"],
+    button:has(> svg[data-testid="SearchIcon"]) {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: var(--border-radius) !important;
+    }
+  }

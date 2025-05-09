@@ -1,0 +1,8 @@
+#list of ignore files by git
+.terraform.lock.hcl
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+lambda-code/upload_book/node_modules
+lambda-code/search_book/node_modules
+lambda-code/download_book/node_modules

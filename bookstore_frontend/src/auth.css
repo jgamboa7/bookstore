@@ -1,0 +1,190 @@
+/* Authentication Form Styling - Add to auth.css or app.css */
+
+/* Center the entire authentication container */
+.amplify-authenticator,
+.auth-container,
+div:has(> form:has(input[placeholder="Enter your Username"])) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 1rem !important;
+}
+
+/* Style container for password fields */
+.amplify-field-group,
+.auth-password-container,
+div:has(> input[type="password"]),
+div:has(> input[placeholder="Enter your Password"]),
+div:has(> input[placeholder="Please confirm your Password"]) {
+  display: flex !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+/* Style password inputs */
+input[type="password"],
+input[placeholder="Enter your Password"],
+input[placeholder="Please confirm your Password"] {
+  width: 100% !important;
+  padding: 0.75rem 1rem !important;
+  padding-right: 3rem !important; /* Make room for the eye icon */
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 4px !important;
+  font-size: 1rem !important;
+  height: 46px !important; /* Fixed height for consistency */
+}
+
+/* Style the password visibility toggle button */
+.amplify-field-group__inner-end,
+.password-visibility-button,
+button:has(> svg[aria-label="View Password"]),
+button:has(> svg[data-testid="VisibilityIcon"]),
+button:has(> svg[data-testid="VisibilityOffIcon"]) {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  height: 100% !important; /* Match height of input */
+  width: 46px !important; /* Fixed width */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 1px solid #e0e0e0 !important;
+  cursor: pointer !important;
+  border-radius: 0 4px 4px 0 !important;
+  padding: 0 !important;
+}
+
+/* Style the eye icon */
+.amplify-icon,
+svg[aria-label="View Password"],
+svg[data-testid="VisibilityIcon"],
+svg[data-testid="VisibilityOffIcon"] {
+  width: 20px !important;
+  height: 20px !important;
+  color: #757575 !important;
+}
+
+/* Hover effect for the visibility toggle */
+.amplify-field-group__inner-end:hover,
+.password-visibility-button:hover,
+button:has(> svg[aria-label="View Password"]):hover,
+button:has(> svg[data-testid="VisibilityIcon"]):hover,
+button:has(> svg[data-testid="VisibilityOffIcon"]):hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Fix for the combined input+button container in some frameworks */
+.amplify-input--with-icon,
+.password-field-container,
+div:has(> input[type="password"] + button) {
+  width: 100% !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Fix specific issues with confirm password field */
+input[placeholder="Please confirm your Password"] {
+  border-right: none !important; /* Remove right border if it's causing issues */
+}
+
+button:has(+ input[placeholder="Please confirm your Password"]),
+button:has(+ input[placeholder="Enter your Password"]) {
+  order: 2 !important; /* Ensure button appears after input */
+}
+
+/* Style the auth form container */
+.amplify-card,
+.auth-form-container,
+form:has(input[placeholder="Enter your Username"]) {
+  width: 100% !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+  background-color: white !important;
+  border:  solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  padding: 2rem !important;
+}
+
+/* Style the tabs or toggle between sign in and create account */
+.amplify-tabs,
+.auth-toggle,
+div:has(> button:contains("Sign In"), > button:contains("Create Account")) {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-bottom: 2rem !important;
+  width: 100% !important;
+}
+
+/* Style individual form fields */
+.amplify-input,
+.auth-input,
+input[placeholder="Enter your Username"],
+input[placeholder="Enter your Password"] {
+  width: 100% !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 4px !important;
+  font-size: 1rem !important;
+}
+
+/* Style form labels */
+.amplify-label,
+.auth-label,
+label:has(+ input[placeholder="Enter your Username"]),
+label:has(+ input[placeholder="Enter your Password"]) {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+}
+
+/* Style the sign in button */
+.amplify-button--primary,
+.auth-submit-button,
+button:contains("Sign in") {
+  width: 100% !important;
+  background-color: var(--primary-color, #FF6B01) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+  margin: 1rem 0 !important;
+}
+
+/* Sign in button hover state */
+.amplify-button--primary:hover,
+.auth-submit-button:hover,
+button:contains("Sign in"):hover {
+  background-color: #ff8124 !important;
+}
+
+/* Style the forgot password link */
+a:contains("Forgot your password?"),
+.forgot-password-link {
+  display: block !important;
+  text-align: center !important;
+  color: #0085d1 !important;
+  text-decoration: none !important;
+  margin-top: 1rem !important;
+  font-size: 0.9rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .amplify-card,
+  .auth-form-container,
+  form:has(input[placeholder="Enter your Username"]) {
+    padding: 1.5rem !important;
+  }
+}

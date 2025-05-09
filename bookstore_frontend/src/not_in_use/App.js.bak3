@@ -1,0 +1,215 @@
+import { Amplify } from 'aws-amplify';
+import React, { useState } from 'react';
+import { Authenticator } from '@aws-amplify/ui-react';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import '@aws-amplify/ui-react/styles.css';
+import './App.css';
+
+// Amplify configuration
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      region: 'eu-central-1',
+      userPoolId: 'eu-central-1_WzD0a7j9d',
+      userPoolClientId: '4hr3o9qh15r6ebhb6r2poabt8i',
+    }
+  }
+});
+
+function App() {
+  const [file, setFile] = useState(null);
+  const [keywords, setKeywords] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [activeTab, setActiveTab] = useState('search'); // Default to search tab
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleUpload = async () => {
+    if (!file || !keywords) {
+      alert('Please select a file and enter keywords.');
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const session = await fetchAuthSession();
+      const token = session.tokens?.idToken?.toString();
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('keywords', keywords);
+      const res = await fetch('https://ug2nos0tmh.execute-api.eu-central-1.amazonaws.com/prod/upload', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      if (res.ok) {
+        alert('File uploaded successfully!');
+        setFile(null);
+        setKeywords('');
+      } else {
+        alert('Upload failed.');
+      }
+    } catch (err) {
+      console.error('Upload error:', err);
+      alert('Upload error.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    
+    try {
+      setIsLoading(true);
+      const session = await fetchAuthSession();
+      const token = session.tokens?.idToken?.toString();
+      const res = await fetch(`https://ug2nos0tmh.execute-api.eu-central-1.amazonaws.com/prod/search?query=${encodeURIComponent(searchQuery)}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error('Search failed');
+      }
+      const data = await res.json();
+      setSearchResults(data.results || []);
+    } catch (err) {
+      console.error('Search error:', err);
+      alert('Search error.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
+
+  return (
+    <Authenticator>
+      {({ signOut, user }) => (
+        <div className="app-container">
+          <header className="app-header">
+            <div className="logo-container">
+              <h1>Famelga Bookstore</h1>
+            </div>
+            <div className="user-controls">
+              <span>Welcome, {user.username}</span>
+              <button className="sign-out-btn" onClick={signOut}>Sign out</button>
+            </div>
+          </header>
+          
+          <div className="mode-toggle">
+            <button 
+              className={`toggle-btn ${activeTab === 'search' ? 'active' : ''}`}
+              onClick={() => setActiveTab('search')}
+            >
+              Search
+            </button>
+            <button 
+              className={`toggle-btn ${activeTab === 'upload' ? 'active' : ''}`}
+              onClick={() => setActiveTab('upload')}
+            >
+              Upload
+            </button>
+          </div>
+          
+          <main className="main-content">
+            {activeTab === 'search' ? (
+              <div className="search-container">
+                <h2>Site Search</h2>
+                <form onSubmit={handleSearch} className="search-form">
+                  <div className="search-input-container">
+                    <input
+                      type="text"
+                      placeholder="Search documents..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="search-input"
+                    />
+                    <button type="submit" className="search-button" disabled={isLoading}>
+                      {isLoading ? (
+                        <span className="loading-spinner"></span>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                          <path d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="white"/>
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </form>
+                
+                {searchResults.length > 0 && (
+                  <div className="search-results">
+                    <h3>Results</h3>
+                    <ul className="results-list">
+                      {searchResults.map((book, i) => (
+                        <li key={i} className="result-item">
+                          <div className="result-title">{book.title || book.filename || 'Unnamed Document'}</div>
+                          {book.excerpt && <div className="result-excerpt">{book.excerpt}</div>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {searchResults.length === 0 && searchQuery && !isLoading && (
+                  <div className="no-results">No results found for "{searchQuery}"</div>
+                )}
+              </div>
+            ) : (
+              <div className="upload-container">
+                <h2>Upload Document</h2>
+                <div className="upload-form">
+                  <div className="file-input-container">
+                    <label htmlFor="file-upload" className="file-input-label">
+                      {file ? file.name : 'Choose file'}
+                    </label>
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept=".pdf,.epub,.docx"
+                      onChange={handleFileChange}
+                      className="file-input"
+                    />
+                  </div>
+                  
+                  <div className="keywords-input-container">
+                    <input
+                      type="text"
+                      placeholder="Enter keywords (comma separated)"
+                      value={keywords}
+                      onChange={(e) => setKeywords(e.target.value)}
+                      className="keywords-input"
+                    />
+                  </div>
+                  
+                  <button 
+                    onClick={handleUpload} 
+                    className="upload-button"
+                    disabled={!file || !keywords || isLoading}
+                  >
+                    {isLoading ? (
+                      <span className="loading-spinner"></span>
+                    ) : (
+                      'Upload Document'
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </main>
+        </div>
+      )}
+    </Authenticator>
+  );
+}
+
+export default App;
