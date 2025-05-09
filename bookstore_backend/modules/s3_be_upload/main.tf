@@ -2,10 +2,6 @@ resource "aws_s3_bucket" "bookstorage" {
   bucket = "bookstorage-be-${random_id.suffix.hex}"
   force_destroy = true
 
-  versioning {
-    enabled = true
-  }
-
   lifecycle {
     prevent_destroy = false
   }
@@ -19,6 +15,11 @@ resource "random_id" "suffix" {
   byte_length = 4
 }
 
-output "bucket_id" {
-  value = aws_s3_bucket.bookstorage.id
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.bookstorage.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
+
+

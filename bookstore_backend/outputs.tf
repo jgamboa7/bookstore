@@ -42,6 +42,14 @@ output "dynamodb_table_arn" {
   value = module.dynamodb.dynamodb_table_arn
 }
 
+output "dynamodb_table_name_state" {
+  value = module.dynamodb_lock_table.dynamodb_table_name_state
+}
+
+output "dynamodb_table_arn_state" {
+  value = module.dynamodb_lock_table.dynamodb_table_arn_state
+}
+
 output "upload_lambda_arn" {
   value = module.lambda_upload.upload_lambda_arn
 }
@@ -80,4 +88,8 @@ output "download_api_url" {
 
 output "execution_arn" {
   value = module.api_gateway.execution_arn
+}
+
+output "bucket_arn_state" {
+  value = module.s3_tfState.bucket_arn_state
 }

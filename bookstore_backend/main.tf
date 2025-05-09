@@ -1,5 +1,9 @@
 module "s3" {
-  source = "./modules/s3"
+  source = "./modules/s3_be_upload"
+}
+
+module "s3_tfState" {
+  source = "./modules/s3_tfState"
 }
 
 module "vpc" {
@@ -17,6 +21,11 @@ module "dynamodb" {
   source       = "./modules/dynamodb"
   project_name = var.project_name
   table_name   = var.tabledb_name
+}
+
+module "dynamodb_lock_table" {
+  source       = "./modules/dynamodb_lock_table"
+  project_name = var.project_name
 }
 
 module "lambda_upload" {
