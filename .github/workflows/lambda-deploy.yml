@@ -34,7 +34,7 @@ jobs:
       run: |
         zip -r download_book.zip download_book
         aws lambda update-function-code \
-          --function-name download_book \
+          --function-name bookstorage-donwload \
           --zip-file fileb://download_book.zip
 
     - name: "Zip and Deploy: search_book"
