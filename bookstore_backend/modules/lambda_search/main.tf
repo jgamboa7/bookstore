@@ -70,7 +70,7 @@ resource "aws_lambda_function" "search_bookss" {
   function_name = "${var.project_name}-search"
   handler       = "index.handler"
   runtime       = "nodejs18.x"
-  #filename      = var.lambdasearch_zip_path
+  filename      = var.lambdasearch_zip_path
   role          = aws_iam_role.lambdasearch_exec_role.arn
   timeout       = 10
   kms_key_arn = null
@@ -83,12 +83,14 @@ resource "aws_lambda_function" "search_bookss" {
     }
   }
 
-  lifecycle {
+  /* lifecycle {
     ignore_changes = [
       source_code_hash,
-      filename
+      filename,
+      image_uri,
+      s3_bucket
     ]
-  }
+  } */
 
   #source_code_hash = filebase64sha256(var.lambdasearch_zip_path)
 }

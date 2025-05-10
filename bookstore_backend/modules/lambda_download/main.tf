@@ -56,7 +56,7 @@ resource "aws_lambda_function" "download_books" {
   handler       = "index.handler"
   runtime       = "nodejs18.x"
   role          = aws_iam_role.lambda_download_exec_role.arn
-  #filename      = var.lambdadownload_zip_path
+  filename      = var.lambdadownload_zip_path
   timeout       = 30
   publish       = false
 
@@ -68,12 +68,14 @@ resource "aws_lambda_function" "download_books" {
     }
   }
 
-  lifecycle {
+  /* lifecycle {
     ignore_changes = [
       source_code_hash,
-      filename
+      filename,
+      image_uri,
+      s3_bucket
     ]
-  }
+  } */
 
   /* source_code_hash = filebase64sha256(var.lambdadownload_zip_path) */
 

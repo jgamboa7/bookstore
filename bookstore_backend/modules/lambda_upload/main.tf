@@ -52,7 +52,7 @@ resource "aws_lambda_function" "upload_books" {
   handler       = "index.handler"
   runtime       = "nodejs18.x"
   role          = aws_iam_role.lambdaupload_exec_role.arn
-  #filename      = var.lambda_zip_path
+  filename      = var.lambda_zip_path
   timeout       = 30
   publish       = false
 
@@ -64,12 +64,14 @@ resource "aws_lambda_function" "upload_books" {
     }
   }
 
-  lifecycle {
+  /* lifecycle {
     ignore_changes = [
       source_code_hash,
-      filename
+      filename,
+      image_uri,
+      s3_bucket
     ]
-  }
+  } */
 
   #source_code_hash = filebase64sha256(var.lambda_zip_path)
 
