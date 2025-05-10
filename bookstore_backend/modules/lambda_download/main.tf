@@ -67,6 +67,6 @@ resource "aws_lambda_function" "download_books" {
     }
   }
 
-  source_code_hash = filebase64sha256(var.lambdadownload_zip_path)
+  /* source_code_hash = filebase64sha256(var.lambdadownload_zip_path) */
 
 }
