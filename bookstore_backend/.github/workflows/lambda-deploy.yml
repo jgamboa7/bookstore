@@ -1,0 +1,52 @@
+name: Lambda Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'bookstore_backend/lambdacode/**'
+
+jobs:
+  deploy-lambdas:
+    name: Deploy Updated Lambdas
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: bookstore_backend/lambdacode
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Install zip
+      run: sudo apt-get update && sudo apt-get install -y zip
+
+    - name: "Zip and Deploy: download_book"
+      run: |
+        zip -r download_book.zip download_book
+        aws lambda update-function-code \
+          --function-name download_book \
+          --zip-file fileb://download_book.zip
+
+    - name: "Zip and Deploy: search_book"
+      run: |
+        zip -r search_book.zip search_book
+        aws lambda update-function-code \
+          --function-name search_book \
+          --zip-file fileb://search_book.zip
+
+    - name: "Zip and Deploy: upload_book"
+      run: |
+        zip -r upload_book.zip upload_book
+        aws lambda update-function-code \
+          --function-name upload_book \
+          --zip-file fileb://upload_book.zip
