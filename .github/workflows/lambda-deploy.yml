@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: bookstore_backend/lambdacode
+        working-directory: bookstore_backend/lambda-code
 
     steps:
     - name: Checkout repo
