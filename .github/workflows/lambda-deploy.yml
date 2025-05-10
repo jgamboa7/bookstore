@@ -41,12 +41,12 @@ jobs:
       run: |
         zip -r search_book.zip search_book
         aws lambda update-function-code \
-          --function-name search_book \
+          --function-name bookstorage-search \
           --zip-file fileb://search_book.zip
 
     - name: "Zip and Deploy: upload_book"
       run: |
         zip -r upload_book.zip upload_book
         aws lambda update-function-code \
-          --function-name upload_book \
+          --function-name bookstorage-upload \
           --zip-file fileb://upload_book.zip
