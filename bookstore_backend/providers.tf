@@ -1,6 +1,6 @@
 provider "aws" {
   region  = var.aws_region
-  profile = var.aws_profile # if running locally
+  #profile = var.aws_profile # if running locally
 }
 
 terraform {
