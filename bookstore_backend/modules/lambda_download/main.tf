@@ -68,14 +68,14 @@ resource "aws_lambda_function" "download_books" {
     }
   }
 
-  /* lifecycle {
+  lifecycle {
     ignore_changes = [
       source_code_hash,
       filename,
       image_uri,
       s3_bucket
     ]
-  } */
+  }
 
   /* source_code_hash = filebase64sha256(var.lambdadownload_zip_path) */
 

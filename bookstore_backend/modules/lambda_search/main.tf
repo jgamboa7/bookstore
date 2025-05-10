@@ -83,14 +83,14 @@ resource "aws_lambda_function" "search_bookss" {
     }
   }
 
-  /* lifecycle {
+  lifecycle {
     ignore_changes = [
       source_code_hash,
       filename,
       image_uri,
       s3_bucket
     ]
-  } */
+  }
 
   #source_code_hash = filebase64sha256(var.lambdasearch_zip_path)
 }
