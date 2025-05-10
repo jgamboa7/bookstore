@@ -176,7 +176,6 @@ exports.handler = async (event, context) => {
     
   } catch (error) {
     console.error(`[${requestId}] Error processing download request:`, error);
-    console.log('this is a test v6');
     
     if (error.message === 'Document not found') {
       return formatResponse(404, { 
@@ -191,4 +190,4 @@ exports.handler = async (event, context) => {
       requestId 
     });
   }
-}; //this is a test for gitactions!
+}; 

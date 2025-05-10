@@ -56,7 +56,7 @@ resource "aws_lambda_function" "download_books" {
   handler       = "index.handler"
   runtime       = "nodejs18.x"
   role          = aws_iam_role.lambda_download_exec_role.arn
-  filename      = var.lambdadownload_zip_path
+  #filename      = var.lambdadownload_zip_path
   timeout       = 30
 
   environment {
