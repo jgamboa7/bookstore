@@ -176,7 +176,7 @@ exports.handler = async (event, context) => {
     
   } catch (error) {
     console.error(`[${requestId}] Error processing download request:`, error);
-    console.log('this is a test v4');
+    console.log('this is a test v5');
     
     if (error.message === 'Document not found') {
       return formatResponse(404, { 
