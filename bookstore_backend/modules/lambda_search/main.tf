@@ -74,12 +74,20 @@ resource "aws_lambda_function" "search_bookss" {
   role          = aws_iam_role.lambdasearch_exec_role.arn
   timeout       = 10
   kms_key_arn = null
+  publish       = false
 
   environment {
     variables = {
       METADATA_TABLE = var.dynamodb_table_name
       CORS_ALLOWED_ORIGIN = var.cors_allowed_origin
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      source_code_hash,
+      filename
+    ]
   }
 
   #source_code_hash = filebase64sha256(var.lambdasearch_zip_path)

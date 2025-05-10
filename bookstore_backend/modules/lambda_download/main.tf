@@ -58,6 +58,7 @@ resource "aws_lambda_function" "download_books" {
   role          = aws_iam_role.lambda_download_exec_role.arn
   #filename      = var.lambdadownload_zip_path
   timeout       = 30
+  publish       = false
 
   environment {
     variables = {
@@ -65,6 +66,13 @@ resource "aws_lambda_function" "download_books" {
       METADATA_TABLE   = var.dynamodb_table_name
       CORS_ALLOWED_ORIGIN = var.cors_allowed_origin
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      source_code_hash,
+      filename
+    ]
   }
 
   /* source_code_hash = filebase64sha256(var.lambdadownload_zip_path) */
