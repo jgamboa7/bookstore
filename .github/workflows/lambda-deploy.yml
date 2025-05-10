@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'bookstore_backend/lambdacode/**'
+      - 'bookstore_backend/lambda-code/**'
 
 jobs:
   deploy-lambdas:
