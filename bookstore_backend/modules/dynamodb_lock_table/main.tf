@@ -12,5 +12,4 @@ resource "aws_dynamodb_table" "terraform-lock-table" {
     Project = var.project_name
     Environment = "prod"
   }
-  //test
 }
