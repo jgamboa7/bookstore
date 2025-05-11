@@ -190,6 +190,6 @@ exports.handler = async (event, context) => {
       requestId 
     });
   }
-  console.log("test");
+  console.log("test1");
   //test
 }; 
