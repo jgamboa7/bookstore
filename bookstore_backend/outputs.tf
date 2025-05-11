@@ -93,3 +93,7 @@ output "execution_arn" {
 output "bucket_arn_state" {
   value = module.s3_tfState.bucket_arn_state
 }
+
+output "sns_arn" {
+  value = module.sns.sns_arn
+}

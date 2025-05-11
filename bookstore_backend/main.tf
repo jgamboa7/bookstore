@@ -70,6 +70,18 @@ module "api_gateway" {
   lambda_search_name           = module.lambda_search.search_lambda_name
   lambda_download_name         = module.lambda_download.download_lambda_name
   download_lambda_arn          = module.lambda_download.download_lambda_arn
-  stage_name            = "prod"
-  cognito_user_pool_arn = module.cognito.user_pool_arn
+  stage_name                   = "prod"
+  cognito_user_pool_arn        = module.cognito.user_pool_arn
+}
+
+module "cloudwatch" {
+  source                       = "./modules/cloudwatch"  
+  lambda_upload_name           = module.lambda_upload.upload_lambda_name
+  lambda_search_name           = module.lambda_search.search_lambda_name
+  lambda_download_name         = module.lambda_download.download_lambda_name
+  sns_arn                      = module.sns.sns_arn
+}
+
+module "sns" {
+  source                       = "./modules/sns"
 }
