@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_metric_alarm" "upload_error_alarm" {
-  alarm_name          = "LambdaUploadErrors"
+  alarm_name          = "lambda-upload-errors"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
   metric_name         = "Errors"
@@ -15,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "upload_error_alarm" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "download_error_alarm" {
-  alarm_name          = "LambdaUploadErrors"
+  alarm_name          = "lambda-download-errors"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
   metric_name         = "Errors"
@@ -31,7 +31,7 @@ resource "aws_cloudwatch_metric_alarm" "download_error_alarm" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "search_error_alarm" {
-  alarm_name          = "LambdaUploadErrors"
+  alarm_name          = "lambda-search-errors"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
   metric_name         = "Errors"
