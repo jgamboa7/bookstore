@@ -1,11 +1,11 @@
-name: Terraform Apply
+name: Terraform pipeline
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'bookstore_backend/**'
+      - 'bookstore_backend/**'   
 
 jobs:
   terraform-apply:
