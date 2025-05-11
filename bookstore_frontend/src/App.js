@@ -87,7 +87,7 @@ function App() {
                 />
               ) : (
                 <div className="upload-container">
-                  <h2>Upload Document</h2>
+                  <h2>Upload Document</h2>                
                   <UploadForm 
                     apiEndpoint={process.env.REACT_APP_API_URI_UPLOAD}
                     getToken={getAuthToken} //Pass the function, not the result
