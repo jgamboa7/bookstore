@@ -11,7 +11,7 @@ resource "aws_cloudwatch_metric_alarm" "upload_error_alarm" {
   dimensions = {
     FunctionName = var.lambda_upload_name 
   }
-  alarm_actions = var.sns_arn
+  alarm_actions = [var.sns_arn]
 }
 
 resource "aws_cloudwatch_metric_alarm" "download_error_alarm" {
@@ -27,7 +27,7 @@ resource "aws_cloudwatch_metric_alarm" "download_error_alarm" {
   dimensions = {
     FunctionName = var.lambda_download_name 
   }
-  alarm_actions = var.sns_arn
+  alarm_actions = [var.sns_arn]
 }
 
 resource "aws_cloudwatch_metric_alarm" "search_error_alarm" {
@@ -43,5 +43,5 @@ resource "aws_cloudwatch_metric_alarm" "search_error_alarm" {
   dimensions = {
     FunctionName = var.lambda_search_name 
   }
-  alarm_actions = var.sns_arn
+  alarm_actions = [var.sns_arn]
 }
