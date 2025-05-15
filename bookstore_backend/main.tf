@@ -6,11 +6,6 @@ module "s3_tfState" {
   source = "./modules/s3_tfState"
 }
 
-/* module "vpc" {
-  region  = var.aws_region
-  source = "./modules/vpc"
-} */
-
 module "cognito" {
   source          = "./modules/cognito"
   frontend_domain = "bookstore.jresume.cloud"
