@@ -1,4 +1,4 @@
-name: Terraform pipeline
+name: Terraform apply
 
 on:
   push:
