@@ -18,10 +18,10 @@ This is a full-stack, serverless web application designed to allow users to uplo
 
 ⚙️ CI/CD Overview
 Pipeline:Description
-Terraform: Plan on PR, Apply on Merge to main with manual approval
-Lambda: Deployment	On push to main, zip & deploy updated code
-Frontend: Deployment	On frontend change, build & sync to S3 + invalidate CloudFront
-Secrets:	AWS credentials & URIs stored in GitHub Secrets
+* Terraform: Plan on PR, Apply on Merge to main with manual approval
+* Lambda: Deployment	On push to main, zip & deploy updated code
+* Frontend: Deployment	On frontend change, build & sync to S3 + invalidate CloudFront
+* Secrets: AWS credentials & URIs stored in GitHub Secrets
 
 ☁️ AWS Services Used
 ✅ S3 (storage & hosting)
