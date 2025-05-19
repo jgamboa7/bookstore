@@ -7,7 +7,7 @@ This is a full-stack, serverless web application designed to allow users to uplo
 ## 🚀 Features
 
 - ✅ **Upload PDFs, DOCX, EPUBs**
-- 🔍 **Search documents** by text content using OpenSearch
+- 🔍 **Search documents** by text content 
 - 📥 **Download** documents
 - 👤 **Cognito authentication**
 - 🧱 **Terraform-managed AWS infrastructure**
